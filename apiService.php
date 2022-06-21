@@ -37,8 +37,8 @@ elseif($Request == "postpelanggan"){
     ];
     $db->insert("pelanggan",$datapelanggan);
     header("location: daftar_pelanggan.php");
-
-}elseif($Request == "postbayi"){
+}
+elseif($Request == "postbayi"){
     $nopermo = createNoPermohonan();
     $noaktak = createNoAkta();
     $namabayi = $_POST['namabayi'];
