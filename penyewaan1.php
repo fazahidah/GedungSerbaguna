@@ -3,43 +3,51 @@ include_once("header.php");
 ?>
 
 <body>
-    <form action="tambah_pelanggan.php" method="POST">
+    <form action="apiService.php" method="post">
+        <input type="hidden" name="req" value="postsewa">
         <div class="col-md-9 p-5 pt-4">
             <h3><i class="fa-solid mr-2"></i>Form Penyewaan</h3>
             <hr>
             <div class="mb-3 row">
-                <label for="nama_pelanggan" class="col-sm-2 col-form-label">Nama Pelanggan</label>
+                <label class="col-sm-2 col-form-label">Nama Pelanggan</label>
                 <div class="col-sm-10">
-                    <select id="select" class="form-select">
-                        <option>Pilih Nama</option>
+                    <select id="select" class="form-select" name="namapelanggan">
+                    <option value="0" selected="selected">-- Pilih Nama Pelanggan --</option>
+                    <?php $no=1; include 'apiService.php';
+                    $data_api = mysqli_query($db->koneksi, "SELECT * from pelanggan order by id_pelanggan"); foreach($data_api as $i): ?>
+                            <option <?php echo $i['nama']; ?>"><?php echo $i['nama']; ?></option>
+                    <?php endforeach ?>
                     </select>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="tanggal_transaksi" class="col-sm-2 col-form-label">Tanggal Transaksi</label>
+                <label class="col-sm-2 col-form-label">Tanggal Transaksi</label>
                 <div class="col-sm-10">
-                    <input type="date" class="form-control" id="inputPassword">
+                    <input type="date" class="form-control" id="tgltransaksi" name="tanggaltrans">
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="tanggal_booking" class="col-sm-2 col-form-label">Tanggal Booking</label>
+                <label class="col-sm-2 col-form-label">Tanggal Booking</label>
                 <div class="col-sm-10">
-                    <input type="date" class="form-control" id="inputPassword">
+                    <input type="date" class="form-control" id="tglsewa" name="tanggalsewa">
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="biaya_sewa" class="col-sm-2 col-form-label">Biaya Sewa</label>
+                <label class="col-sm-2 col-form-label">Biaya Sewa</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputPassword">
+                    <input type="number" class="form-control" id="biaya" name="biaya">
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="keterangan" class="col-sm-2 col-form-label">Keterangan</label>
+                <label class="col-sm-2 col-form-label">Keterangan</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputPassword">
+                    <input type="text" class="form-control" id="ket" name="ket">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div>
+                <input type="hidden" name="req" value="postsewa">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
 
         </div>
     </form>

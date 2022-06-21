@@ -6,36 +6,32 @@ include_once("header.php");
     <div class="col-md-9 p-5 pt-4">
         <h3><i class="fa-solid fa-gauge-high mr-2"></i>Daftar Transaksi</h3>
         <hr>
-        <table class="table table-sm">
-            <thead>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Tanggal Transaksi</th>
-                    <th scope="col">Tanggal Booking</th>
-                    <th scope="col">Biaya</th>
-                    <th scope="col">Keterangan</th>
-                    <th scope="col">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                include 'koneksi.php';
-                $sql = "SELECT * FROM sewa";
-                $hasil = mysqli_query($koneksi, $sql);
-                while ($row = mysqli_fetch_array($hasil)) {
-                ?>
-                    <tr>
-                        <td><?= $row['id_sewa']; ?></td>
-                        <td><?= $row['tanggal_transaksi']; ?></td>
-                        <td><?= $row['tanggal_booking']; ?></td>
-                        <td><?= $row['biaya']; ?></td>
-                        <td><?= $row['keterangan']; ?></td>
-                        <td><a href="editsewa.php?id=<?= $row['id_sewa'] ?>"> Edit</a> | <a href="deletesewa.php?id=<?= $row['id_sewa'] ?>"> Delete</td>
-                    </tr>
-                <?php }
-                ?>
-            </tbody>
-        </table>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Nama Penyewa</th>
+                <th scope="col">Tanggal Transaksi</th>
+                <th scope="col">Tanggal Booking</th>
+                <th scope="col">Biaya Sewa</th>
+                <th scope="col">Ket</th>
+            </tr>
+        </thead>
+        <tbody>
+			<?php $no=1; include 'apiService.php';
+            $data_api = mysqli_query($db->koneksi, "SELECT * from sewa"); foreach($data_api as $i): ?>
+			<tr>
+				<td><?=$no?></td>
+				<td><?=$i['nama']?></td>
+				<td><?=$i['tanggal_transaksi']?></td>
+				<td><?=$i['tanggal_booking']?></td>
+				<td><?=$i['biaya']?></td>
+				<td><?=$i['keterangan']?></td>
+			</tr>
+			<?php $no++; endforeach ?>
+		</tbody>
+    </table>
+    
     </div>
     </div>
 

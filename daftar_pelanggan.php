@@ -43,41 +43,65 @@ include_once("header.php");
 				<td><?=$i['alamat']?></td>
 				<td><?=$i['nomer_telepon']?></td>
 				<td class="btn-group" role="group">
-					<a class="editBtn">
-                        <button class="btn btn-xs btn-warning fas fa-edit" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    </a>
+					<a href="" class="btn btn-xs btn-warning fas fa-edit" data-toggle="modal"
+            data-target="#modal<?php echo $i['id_pelanggan']; ?>"></a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modal<?php echo $i['id_pelanggan']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Barang</h5>
+                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="apiService.php" method="post">
+                                <input type="hidden" name="req" value="postupdate">
+                                <input type="hidden" name="id" value="<?php echo $i['id_pelanggan']; ?>">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Nama Pelanggan</label>
+                                        <input name="editNama" type="text" class="form-control" value="<?php echo $i['nama']; ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Alamat</label>
+                                        <textarea name="editAlamat" class="form-control" rows="3"><?php echo $i['alamat']; ?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">No Telepon</label>
+                                        <input name="editNotelp" type="text" class="form-control" value="<?php echo $i['nomer_telepon']; ?>">
+                                    </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <!-- <input type="hidden" name="req" value="postupdate"> -->
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+
 					<a><button class="btn btn-xs btn-danger fas fa-trash"></a>
 				</td>
 			</tr>
 			<?php $no++; endforeach ?>
 		</tbody>
     </table>
-    <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-                </div>
-            </div>
-        </div>
+        
 	</div>
 </div>
 
 </div>
 </body>
-<script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+    </script>
+<!-- <script>
     $(".editBtn").click(function(){
         $('exampleModal').modal('show');
     })
-</script>
+</script> -->
 </html>
